@@ -48,7 +48,6 @@ var config = {
 	server: {
 			baseDir: './build'
 	},
-	tunnel: true,
 	host: 'localhost',
 	port: 9000,
 	browser: ['chrome']
@@ -66,14 +65,12 @@ gulp.task('html:build', function () {
 gulp.task('js:build', function () {
 	return gulp.src(path.src.js)
 		.pipe(rigger())
-		.pipe(sourcemaps.init())
 		.pipe(minify({
 			noSource: true,
 			ext: {
 				min: '.min.js'
 			}
 		}))
-		.pipe(sourcemaps.write('.'))
 		.pipe(gulp.dest(path.build.js))
 		.pipe(reload({stream: true}));
 });
