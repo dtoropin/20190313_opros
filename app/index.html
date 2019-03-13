@@ -4,14 +4,94 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
-	<link rel="stylesheet" href="css/main.min.css">
-	<link rel="stylesheet" href="css/index.min.css">
+	<link rel="icon" href="img/favicon.png">
+	<title>Опрос</title>
+	<link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
-	<section>
-		<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam rem animi assumenda id ipsa dolorum fuga eveniet sint iste molestias, rerum laborum incidunt nesciunt explicabo quidem cupiditate, consequuntur, necessitatibus pariatur!</p>
-	</section>
+	<div class="container">
+		<h2>Опрос по первой помощи.</h2>
+		<hr>
+
+		<form id="answerForm">
+			<div class="row">
+				<div class="form-group col-lg-6 col-md-6">
+					<label for="inputname">Имя</label>
+					<input type="text" name="name"
+						class="form-control text-capitalize" id="inputname"
+						placeholder="Ваше имя"
+					>
+				</div>
+				<div class="form-group col-lg-6 col-md-6">
+					<label for="inputsurname">Фамилия</label>
+					<input type="text" name="surname"
+						class="form-control text-capitalize" id="inputsurname"
+						placeholder="Ваша фамилия"
+					>
+				</div>
+			</div>
+
+			<hr>
+
+			<h3>Вопросы:</h3>
+			
+			<div class="form-group jumbotron">
+				<b>#1</b>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sint ex mollitia doloremque obcaecati ab dicta iure? Earum, quod quidem?
+				</p>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question1" value="answer1">
+						Option one is this and that&mdash;be sure to include why it's great
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question1" value="answer2">
+						Option two can be something else and selecting it will deselect option one
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question1" value="answer3">
+						Option three is disabled
+					</label>
+				</div>
+			</div><!-- .form-group jumbotron -->
+
+			<div class="form-group jumbotron">
+				<b>#2</b>
+				<p>
+					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sint ex mollitia doloremque obcaecati ab dicta iure? Earum, quod quidem?
+				</p>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question2" value="answer1">
+						Option one is this and that&mdash;be sure to include why it's great
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question2" value="answer2">
+						Option two can be something else and selecting it will deselect option one
+					</label>
+				</div>
+				<div class="radio">
+					<label>
+						<input type="radio" name="question2" value="answer3">
+						Option three is disabled
+					</label>
+				</div>
+			</div><!-- .form-group jumbotron -->
+			
+			<button type="submit" class="btn btn-info btn-lg btn-block">Посмотреть результат</button>
+		</form>
+
+	</div><!-- .container -->
+	<footer class="small text-center">
+		&copy; 2019, D.Toropin
+	</footer>
 	<script src="js/vendor.min.js"></script>
 	<script src="js/index.min.js"></script>
 </body>
