@@ -38,7 +38,8 @@ var path = {
 			style: 'app/sass/**/*.sass',
 			img: 'app/img/**/*.*',
 			fonts: 'app/fonts/**/*.*'
-	}
+	},
+	clean: '/public_html'
 };
 
 var config = {
@@ -109,11 +110,11 @@ gulp.task('build', gulp.parallel('html:build', 'js:build', 'style:build', 'image
 
 // watch
 gulp.task('watch', function(){
-	watch([path.watch.html], gulp.series('html:build'));
-	watch([path.watch.style], gulp.series('style:build'));
+	// watch([path.watch.html], gulp.series('html:build'));
+	// watch([path.watch.style], gulp.series('style:build'));
 	watch([path.watch.js], gulp.series('js:build'));
-	watch([path.watch.img], gulp.series('image:build'));
-	watch([path.watch.fonts], gulp.series('fonts:build'));
+	// watch([path.watch.img], gulp.series('image:build'));
+	// watch([path.watch.fonts], gulp.series('fonts:build'));
 });
 
 // server
@@ -127,7 +128,8 @@ gulp.task('clean', function (cb) {
 });
 
 // default task
-gulp.task('default', gulp.series('clean', 'build', gulp.parallel('webserver', 'watch')));
+// gulp.task('default', gulp.series('clean', 'build', gulp.parallel('webserver', 'watch')));
+gulp.task('default', gulp.series('clean', 'build', 'watch'));
 
 //////////////////////////////////////////////////////////////////////
 // final build project
@@ -164,7 +166,7 @@ gulp.task('public:config', function () {
 	return gulp.src('config/**/*.*').pipe(gulp.dest('public/config/'))
 });
 gulp.task('public:htaccess', function () {
-	return gulp.src('.htaccess').pipe(gulp.dest('public/'))
+	return gulp.src('ht.access').pipe(gulp.dest('public/'))
 });
 gulp.task('public:readme', function () {
 	return gulp.src('readme.md').pipe(gulp.dest('public/'))
