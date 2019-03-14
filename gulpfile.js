@@ -19,20 +19,18 @@ var gulp = require('gulp'),
 
 var path = {
 	build: {
-			html: 'build/',
-			js: 'build/js/',
-			css: 'build/css/',
-			img: 'build/img/',
-			fonts: 'build/fonts/',
-			sprite: 'build/img/sprite/'
+			html: 'public_html/',
+			js: 'public_html/js/',
+			css: 'public_html/css/',
+			img: 'public_html/img/',
+			fonts: 'public_html/fonts/'
 	},
 	src: {
 			html: 'app/*.html',
 			js: 'app/js/*.js',
 			style: 'app/sass/*.sass',
 			img: 'app/img/**/*.*',
-			fonts: 'app/fonts/**/*.*',
-			sprite: 'app/img/sprite/*.*'
+			fonts: 'app/fonts/**/*.*'
 	},
 	watch: {
 			html: 'app/**/*.html',
@@ -40,13 +38,12 @@ var path = {
 			style: 'app/sass/**/*.sass',
 			img: 'app/img/**/*.*',
 			fonts: 'app/fonts/**/*.*'
-	},
-	clean: './build'
+	}
 };
 
 var config = {
 	server: {
-			baseDir: './build'
+			baseDir: './public_html'
 	},
 	host: 'localhost',
 	port: 9000,
@@ -131,3 +128,59 @@ gulp.task('clean', function (cb) {
 
 // default task
 gulp.task('default', gulp.series('clean', 'build', gulp.parallel('webserver', 'watch')));
+
+//////////////////////////////////////////////////////////////////////
+// final build project
+// public
+gulp.task('public:css', function () {
+	return gulp.src('public_html/css/**/*.*').pipe(gulp.dest('public/public_html/css/'))
+});
+gulp.task('public:js', function () {
+	return gulp.src('public_html/js/**/*.*').pipe(gulp.dest('public/public_html/js/'))
+});
+gulp.task('public:fonts', function () {
+	return gulp.src('public_html/fonts/**/*.*').pipe(gulp.dest('public/public_html/fonts/'))
+});
+gulp.task('public:img', function () {
+	return gulp.src('public_html/img/**/*.*').pipe(gulp.dest('public/public_html/img/'))
+});
+gulp.task('public:index', function () {
+	return gulp.src('index.php').pipe(gulp.dest('public/public_html/'))
+});
+
+gulp.task('public:php', function () {
+	return gulp.src('php/**/*.*').pipe(gulp.dest('public/php/'))
+});
+gulp.task('public:vendor', function () {
+	return gulp.src('vendor/**/*.*').pipe(gulp.dest('public/vendor/'))
+});
+gulp.task('public:views', function () {
+	return gulp.src('views/**/*.*').pipe(gulp.dest('public/views/'))
+});
+gulp.task('public:database', function () {
+	return gulp.src('database/**/*.*').pipe(gulp.dest('public/database/'))
+});
+gulp.task('public:config', function () {
+	return gulp.src('config/**/*.*').pipe(gulp.dest('public/config/'))
+});
+gulp.task('public:htaccess', function () {
+	return gulp.src('.htaccess').pipe(gulp.dest('public/'))
+});
+gulp.task('public:readme', function () {
+	return gulp.src('readme.md').pipe(gulp.dest('public/'))
+});
+
+gulp.task('public', gulp.series(
+	'public:css',
+	'public:js',
+	'public:fonts',
+	'public:img',
+	'public:php',
+	'public:vendor',
+	'public:views',
+	'public:database',
+	'public:config',
+	'public:index',
+	'public:htaccess',
+	'public:readme'
+));
