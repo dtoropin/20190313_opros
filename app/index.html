@@ -19,79 +19,44 @@
 					<label for="inputname">Имя</label>
 					<input type="text" name="name"
 						class="form-control text-capitalize" id="inputname"
-						placeholder="Ваше имя"
+						placeholder="Ваше имя" required
 					>
 				</div>
 				<div class="form-group col-lg-6 col-md-6">
 					<label for="inputsurname">Фамилия</label>
 					<input type="text" name="surname"
 						class="form-control text-capitalize" id="inputsurname"
-						placeholder="Ваша фамилия"
+						placeholder="Ваша фамилия" required
 					>
 				</div>
 			</div>
-
 			<hr>
-
 			<h3>Вопросы:</h3>
-			
-			<div class="form-group jumbotron">
-				<b>#1</b>
-				<p>
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sint ex mollitia doloremque obcaecati ab dicta iure? Earum, quod quidem?
-				</p>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question1" value="answer1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question1" value="answer2">
-						Option two can be something else and selecting it will deselect option one
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question1" value="answer3">
-						Option three is disabled
-					</label>
-				</div>
-			</div><!-- .form-group jumbotron -->
-
-			<div class="form-group jumbotron">
-				<b>#2</b>
-				<p>
-					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum sint ex mollitia doloremque obcaecati ab dicta iure? Earum, quod quidem?
-				</p>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question2" value="answer1">
-						Option one is this and that&mdash;be sure to include why it's great
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question2" value="answer2">
-						Option two can be something else and selecting it will deselect option one
-					</label>
-				</div>
-				<div class="radio">
-					<label>
-						<input type="radio" name="question2" value="answer3">
-						Option three is disabled
-					</label>
-				</div>
-			</div><!-- .form-group jumbotron -->
-			
+			<div id="vopros"></div>
 			<button type="submit" class="btn btn-info btn-lg btn-block">Посмотреть результат</button>
 		</form>
-
 	</div><!-- .container -->
 	<footer class="small text-center">
 		&copy; 2019, D.Toropin
 	</footer>
+
+	<!-- Modal -->
+	<div class="modal fade" id="successModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Ваш результат</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="otvet-div modal-body">
+					<strong>Правильных ответов: <span class="otvet display-4">78%</span></strong>
+				</div>
+			</div>
+		</div>
+	</div><!-- .modal -->
+
 	<script src="js/vendor.min.js"></script>
 	<script src="js/index.min.js"></script>
 </body>

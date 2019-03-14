@@ -24,7 +24,7 @@
 		"rimraf": "^2.6.3"
 	},
 	"dependencies": {
-		"bootstrap": "3",
+		"bootstrap": "^4.3.1",
 		"gulp-cli": "^2.0.1",
 		"jquery": "^3.2.1"
 	}
