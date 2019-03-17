@@ -1,75 +1,107 @@
 (function () {
 
-	var _radio = $('input[type="radio"]'),
-		_content = $('.container')[0],
-		_vopros = $('#vopros'),
-		_otvet = $('.otvet')[0],
-		_otvetDiv = $('.otvet-div')[0],
+	var _content = $('.container'),
+		_questions = $('#questions'),
+		_answer = $('.answer-block'),
+		_answerRight = $('.answer-block__right'),
+		_btnSubmit = $('.answerForm__btn'),
+		_inputFIO = $('.answerForm__item-input'),
+		_rightAnswers = [],
+		_countRightAnswer = 80,
 		_url = '/main/';
 
 	var init = function () {
-		_showAnswer();
+		_showQuestions();
 		_setUpListners();
-	};
-
-	// Выводим вопросы
-	var _showAnswer = function () {
-		var url = _url + 'get/';
-		_vopros.empty();
-
-		runAjax(url, null).done(function (res) {
-			console.log(res.row);
-			for (var i = 0; i <= res.row.length; i++) {
-				var div = '<div class="form-group jumbotron"><b>#'
-					+ (i + 1) + '</b><p>'
-					+ res.row.ques + '?</p>';
-				for (var j = 0; j <= res.row.ans.length; j++) {
-					div += '<div class="radio"><label><input type="radio" name="question1" value="answer'
-						+ (j + 1) + '">'
-						+ res.row.ans[j]
-						+ '</label></div>';
-				}
-				div += '</div><!-- .form-group jumbotron -->';
-				_vopros.append(div);
-			}
-		})
-			.fail(function () {
-				var div = '<div class="form-group jumbotron">Вопросов пока не напечатали :(</div>';
-				_vopros.append(div);
-				$('button[type="submit"]').attr('disabled', 'disabled');
-				console.log('error');
-			});
 	};
 
 	// События
 	var _setUpListners = function () {
-		_radio.on('click', _radioDisabled);
 		$('#answerForm').on('submit', _answerSubmit);
 	};
 
-	var _radioDisabled = function (e) {
-		var elements = $.find('input[name="' + e.target.name + '"]');
-		elements.forEach(function (e) {
-			e.setAttribute('disabled', 'disabled');
-		});
+	// Выводим вопросы
+	var _showQuestions = function () {
+		var url = _url + 'get/';
+
+		runAjax(url, null).done(function (result) {
+			$.each(result.row, function (i, item) {
+				_rightAnswers.push(item.right);
+				var question = item.questions,
+					answer = item.answers.split(';');
+
+				var div = '<div class="form-group jumbotron">' +
+					'<b>#' + (i + 1) + '</b>' +
+					'<p>' + question + '?</p>';
+
+				$.each(answer, function (j, radio) {
+					div += '<div class="radio">' +
+						'<label>' +
+						'<input type="radio" class="questions__radio" name="question'
+						+ (i + 1) + '" value="'
+						+ (j + 1) + '">'
+						+ radio +
+						'</label>' +
+						'</div>';
+				});
+				div += '</div><!-- .form-group jumbotron -->';
+				_questions.append(div);
+			});
+		})
+			.fail(function () {
+				var div = '<div class="form-group jumbotron">' +
+					'Вопросов пока не напечатали :(' +
+					'</div>';
+				_questions.append(div);
+				_btnSubmit.prop('disabled', true);
+			});
+	};
+
+	var _radioDisabled = function () {
+		$('.questions__radio').prop('disabled', true);
 	};
 
 	var _answerSubmit = function (e) {
 		e.preventDefault();
+
+		// подсчет правильных ответов и подсветка
+		var count = 0;
+		$.each(_rightAnswers, function (i, value) {
+			var checked = $('.questions__radio[name="question' + (i + 1) + '"]:checked');
+			// красим правильный ответ в зеленый
+			$('.questions__radio[name="question' + (i + 1) + '"][value=' + value + ']')
+				.parent()
+				.css({color: 'green', fontWeight: 'bold'});
+			if (checked.val() === value) {
+				count++;
+			} else {
+				// красим неправильный ответ
+				checked
+					.parent()
+					.css({color: 'red', fontWeight: 'bold'})
+			}
+		});
+		_radioDisabled();
+		var rightAnswer = count / _rightAnswers.length * 100;
+		$('.answerForm__right').val(rightAnswer);
+
+		// отправка данных и вывод результата
 		var url = _url + 'save/',
 			data = $(this).serialize();
-		runAjax(url, data).done(function (res) {
-			_otvetDiv.addClass(
-				(res.ans > 80) ? 'bg-success' : 'bg-danger'
+
+		runAjax(url, data).done(function () {
+			_answer.addClass(
+				(rightAnswer > _countRightAnswer) ? 'bg-success' : 'bg-danger'
 			);
-			_otvet.innerText = res.ans + '%';
+			_answerRight.text(rightAnswer + '%');
 			$('#successModal').modal('show');
-			$('button[type="submit"]').attr('disabled', 'disabled');
-			console.log("success");
+			_btnSubmit.prop('disabled', true);
+			_inputFIO.prop('disabled', true);
 		})
 			.fail(function () {
-				_content.innerHTML = '<div class="alert alert-danger">Непредвиденный сбой сервера, попробуйте позже...</div>';
-				console.log("error");
+				_content.html('<div class="alert alert-danger">' +
+					'Непредвиденный сбой сервера, попробуйте позже...' +
+					'</div>');
 			});
 	};
 

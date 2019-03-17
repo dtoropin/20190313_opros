@@ -10,34 +10,39 @@
 </head>
 <body>
 <div class="container">
-	<h2>Опрос по первой помощи.</h2>
+	<h2 class="container__head">Опрос по первой помощи.</h2>
 	<hr>
 
-	<form id="answerForm">
+	<form id="answerForm" class="answerForm">
 		<div class="row">
-			<div class="form-group col-lg-6 col-md-6">
-				<label for="inputname">Имя</label>
+			<div class="answerForm__item form-group col-lg-6 col-md-6">
+				<label class="answerForm__item-label" for="inputname">Имя</label>
 				<input type="text" name="name"
-							 class="form-control text-capitalize" id="inputname"
-							 placeholder="Ваше имя" required
+							 class="answerForm__item-input form-control text-capitalize"
+							 id="inputname"
+							 placeholder="Ваше имя"
 				>
-			</div>
-			<div class="form-group col-lg-6 col-md-6">
+			</div><!-- .answerForm__item -->
+			<div class="answerForm__item form-group col-lg-6 col-md-6">
 				<label for="inputsurname">Фамилия</label>
 				<input type="text" name="surname"
-							 class="form-control text-capitalize" id="inputsurname"
-							 placeholder="Ваша фамилия" required
+							 class="answerForm__item-input form-control text-capitalize"
+							 id="inputsurname"
+							 placeholder="Ваша фамилия"
 				>
-			</div>
-		</div>
+			</div><!-- .answerForm__item -->
+		</div><!-- .row -->
 		<hr>
-		<h3>Вопросы:</h3>
-		<div id="vopros"></div>
-		<button type="submit" class="btn btn-info btn-lg btn-block">Посмотреть результат</button>
+		<h3 class="answerForm__head">Вопросы:</h3>
+		<div class="questions" id="questions"></div>
+		<input type="hidden" name="right" class="answerForm__right">
+		<button type="submit" class="answerForm__btn btn btn-info btn-lg btn-block">
+			Посмотреть результат
+		</button>
 	</form>
 </div><!-- .container -->
 <footer class="small text-center">
-	&copy; 2019, D.Toropin
+	&copy;&nbsp;2019, Д.Торопин, вопросы&nbsp;-&nbsp;Ю.Леонтьева
 </footer>
 
 <!-- Modal -->
@@ -46,15 +51,22 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title">Ваш результат</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
+			</div>
+			<div class="answer-block modal-body">
+				<strong>Правильных ответов:
+					<span class="answer-block__right display-4">78%</span>
+				</strong>
+			</div>
+			<div class="modal-footer">
+				<button type="button"
+								class="answer-block__btn btn btn-outline-secondary"
+								data-dismiss="modal"
+				>
+					Закрыть и посмотреть, где накосячили..
 				</button>
 			</div>
-			<div class="otvet-div modal-body">
-				<strong>Правильных ответов: <span class="otvet display-4">78%</span></strong>
-			</div>
-		</div>
-	</div>
+		</div><!-- .modal-content -->
+	</div><!-- .modal-dialog -->
 </div><!-- .modal -->
 
 <script src="/js/vendor.min.js"></script>

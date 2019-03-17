@@ -39,7 +39,7 @@ var path = {
 			img: 'app/img/**/*.*',
 			fonts: 'app/fonts/**/*.*'
 	},
-	clean: '/public_html'
+	clean: './public_html'
 };
 
 var config = {
@@ -106,7 +106,8 @@ gulp.task('fonts:build', function() {
 });
 
 // build
-gulp.task('build', gulp.parallel('html:build', 'js:build', 'style:build', 'image:build', 'fonts:build'));
+// gulp.task('build', gulp.parallel('html:build', 'js:build', 'style:build', 'image:build', 'fonts:build'));
+gulp.task('build', gulp.parallel('js:build'));
 
 // watch
 gulp.task('watch', function(){
@@ -129,7 +130,7 @@ gulp.task('clean', function (cb) {
 
 // default task
 // gulp.task('default', gulp.series('clean', 'build', gulp.parallel('webserver', 'watch')));
-gulp.task('default', gulp.series('clean', 'build', 'watch'));
+gulp.task('default', gulp.series('build', 'watch'));
 
 //////////////////////////////////////////////////////////////////////
 // final build project
