@@ -23,8 +23,7 @@
 	// проверка FIO в bd
 	var _checkFIO = function (e) {
 		e.preventDefault();
-		var url = _url + 'check/',
-			name = $('#inputname'),
+		var name = $('#inputname'),
 			surname = $('#inputsurname');
 
 		name.on('keyup', _removeInvalid);
@@ -39,8 +38,8 @@
 			return false;
 		}
 
-		var data = 'name=' + name.val()
-			+ '&surname=' + surname.val();
+		var url = _url + 'check/',
+			data = 'name=' + name.val()	+ '&surname=' + surname.val();
 
 		runAjax(url, data).done(function (result) {
 			if (result.count) {

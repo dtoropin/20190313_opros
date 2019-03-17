@@ -24,7 +24,7 @@ class Main
 		$saveFIOResult->right = htmlentities($_POST['right']);
 		$saveFIOResult->save();
 
-		return $this->data;
+		return true;
 	}
 
 	function check()
