@@ -31,14 +31,22 @@
 							 placeholder="Ваша фамилия"
 				>
 			</div><!-- .answerForm__item -->
+			<button class="answerForm__checkFIO btn btn-outline-info btn-lg">
+				Перейти к вопросам ->
+			</button>
 		</div><!-- .row -->
 		<hr>
-		<h3 class="answerForm__head">Вопросы:</h3>
-		<div class="questions" id="questions"></div>
-		<input type="hidden" name="right" class="answerForm__right">
-		<button type="submit" class="answerForm__btn btn btn-info btn-lg btn-block">
-			Посмотреть результат
-		</button>
+		<div class="answerForm__question">
+			<h3 class="answerForm__head" hidden>Вопросы:</h3>
+			<div class="questions" id="questions"></div>
+			<input type="hidden" name="right" class="answerForm__right">
+			<button type="submit"
+							class="answerForm__btn btn btn-info btn-lg btn-block"
+							hidden
+			>
+				Посмотреть результат
+			</button>
+		</div><!-- .answerForm__question -->
 	</form>
 </div><!-- .container -->
 <footer class="small text-center">

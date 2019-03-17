@@ -112,7 +112,7 @@ gulp.task('build', gulp.parallel('js:build'));
 // watch
 gulp.task('watch', function(){
 	// watch([path.watch.html], gulp.series('html:build'));
-	// watch([path.watch.style], gulp.series('style:build'));
+	watch([path.watch.style], gulp.series('style:build'));
 	watch([path.watch.js], gulp.series('js:build'));
 	// watch([path.watch.img], gulp.series('image:build'));
 	// watch([path.watch.fonts], gulp.series('fonts:build'));

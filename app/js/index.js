@@ -11,13 +11,59 @@
 		_url = '/main/';
 
 	var init = function () {
-		_showQuestions();
 		_setUpListners();
 	};
 
 	// События
 	var _setUpListners = function () {
 		$('#answerForm').on('submit', _answerSubmit);
+		$('.answerForm__checkFIO').on('click', _checkFIO);
+	};
+
+	// проверка FIO в bd
+	var _checkFIO = function (e) {
+		e.preventDefault();
+		var url = _url + 'check/',
+			name = $('#inputname'),
+			surname = $('#inputsurname');
+
+		name.on('keyup', _removeInvalid);
+		surname.on('keyup', _removeInvalid);
+
+		if (name.val() === '') {
+			name.addClass('is-invalid');
+			return false;
+		}
+		if (surname.val() === '') {
+			surname.addClass('is-invalid');
+			return false;
+		}
+
+		var data = 'name=' + name.val()
+			+ '&surname=' + surname.val();
+
+		runAjax(url, data).done(function (result) {
+			if (result.count) {
+				$('.answerForm__checkFIO').hide();
+				$('.answerForm__question').show();
+				_showQuestions();
+			} else {
+				_content.html('<div class="alert alert-danger">' +
+					'Вы уже проходили опрос...' +
+					'</div>');
+				return false;
+			}
+		})
+			.fail(function () {
+				_content.html('<div class="alert alert-danger">' +
+					'Непредвиденный сбой сервера, попробуйте позже...' +
+					'</div>');
+				return false;
+			});
+	};
+
+	var _removeInvalid = function (e) {
+		$(e.target).removeClass('is-invalid');
 	};
 
 	// Выводим вопросы
@@ -47,6 +93,8 @@
 				div += '</div><!-- .form-group jumbotron -->';
 				_questions.append(div);
 			});
+			_btnSubmit.prop('hidden', false);
+			$('.answerForm__head').prop('hidden', false);
 		})
 			.fail(function () {
 				var div = '<div class="form-group jumbotron">' +
@@ -55,10 +103,6 @@
 				_questions.append(div);
 				_btnSubmit.prop('disabled', true);
 			});
-	};
-
-	var _radioDisabled = function () {
-		$('.questions__radio').prop('disabled', true);
 	};
 
 	var _answerSubmit = function (e) {
@@ -81,7 +125,7 @@
 					.css({color: 'red', fontWeight: 'bold'})
 			}
 		});
-		_radioDisabled();
+		$('.questions__radio').prop('disabled', true);
 		var rightAnswer = count / _rightAnswers.length * 100;
 		$('.answerForm__right').val(rightAnswer);
 
@@ -102,6 +146,7 @@
 				_content.html('<div class="alert alert-danger">' +
 					'Непредвиденный сбой сервера, попробуйте позже...' +
 					'</div>');
+				return false;
 			});
 	};
 

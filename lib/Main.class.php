@@ -18,13 +18,25 @@ class Main
 
 	function save()
 	{
-//		$saveFIOResult = ORM::for_table('person')->create();
-//		$saveFIOResult->name = trim(htmlspecialchars($_POST['name']));
-//		$saveFIOResult->surname = trim(htmlspecialchars($_POST['surname']));
-//		$saveFIOResult->right = htmlspecialchars($_POST['right']);
-//		$saveFIOResult->save();
+		$saveFIOResult = ORM::for_table('usersanswer')->create();
+		$saveFIOResult->name = trim(htmlentities(strtolower($_POST['name'])));
+		$saveFIOResult->surname = trim(htmlentities(strtolower($_POST['surname'])));
+		$saveFIOResult->right = htmlentities($_POST['right']);
+		$saveFIOResult->save();
 
-		$this->data['right'] = 79;
+		return $this->data;
+	}
+
+	function check()
+	{
+		$name = trim(htmlentities(strtolower($_POST['name'])));
+		$surname = trim(htmlentities(strtolower($_POST['surname'])));
+		$count = ORM::for_table('usersanswer')->where(array(
+			'name' => $name,
+			'surname' => $surname
+		))->count();
+
+		$this->data['count'] = ($count > 0) ? false : true;
 
 		return $this->data;
 	}
