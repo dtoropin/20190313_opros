@@ -11,6 +11,9 @@
 <body>
 <div class="container">
 	<h2 class="container__head">Опрос по первой помощи.</h2>
+	<small class="container__description">
+		(в рамках курса "Первой помощи" обучения инструкторов пешеходного туризма)
+	</small>
 	<hr>
 
 	<form id="answerForm" class="answerForm">
@@ -21,6 +24,7 @@
 							 class="answerForm__item-input form-control text-capitalize"
 							 id="inputname"
 							 placeholder="Ваше имя"
+							 autofocus
 				>
 			</div><!-- .answerForm__item -->
 			<div class="answerForm__item form-group col-lg-6 col-md-6">

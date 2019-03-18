@@ -37,7 +37,7 @@
 	</div><!-- .tab-content -->
 </div><!-- .container -->
 <footer class="small text-center">
-	&copy; 2019, D.Toropin
+	&copy;&nbsp;2019, Д.Торопин, вопросы&nbsp;-&nbsp;Ю.Леонтьева
 </footer>
 
 <!-- Modal -->
@@ -57,6 +57,7 @@
 							<textarea type="text" name="question"
 												class="form-control modal-question"
 												placeholder="Ваш вопрос"
+												autofocus
 							></textarea>
 						</label>
 					</div>

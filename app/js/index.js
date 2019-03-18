@@ -7,7 +7,7 @@
 		_btnSubmit = $('.answerForm__btn'),
 		_inputFIO = $('.answerForm__item-input'),
 		_rightAnswers = [],
-		_countRightAnswer = 80,
+		_countRightAnswer = 87,
 		_url = '/main/';
 
 	var init = function () {
@@ -77,7 +77,7 @@
 
 				var div = '<div class="form-group jumbotron">' +
 					'<b>#' + (i + 1) + '</b>' +
-					'<p>' + question + '?</p>';
+					'<p>' + question + '</p>';
 
 				$.each(answer, function (j, radio) {
 					div += '<div class="radio">' +

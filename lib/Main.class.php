@@ -4,7 +4,7 @@ require_once 'j4mie/idiorm.php';
 class Main
 {
 	protected $data = [];
-	protected $countQuestion = 3;
+	protected $countQuestion = 5;
 	protected $selectedQuestion = [];
 
 	function __construct()

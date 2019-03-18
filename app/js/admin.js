@@ -8,7 +8,7 @@
 		_tableQuestion = $('#tableQuestions'),
 		_form = $('#questionForm'),
 		_formTitle = $('.modal-title'),
-		_countRightAnswer = 80,
+		_countRightAnswer = 87,
 		_url = '/admin/',
 		_numberAnswer = null;
 
@@ -143,7 +143,7 @@
 			_getQuestions();
 		})
 			.fail(function () {
-				console.log("error");
+				console.log('error');
 			});
 	};
 
@@ -158,7 +158,7 @@
 			$('#questionModal').modal('hide');
 		})
 			.fail(function () {
-				console.log("error");
+				console.log('error');
 			});
 	};
 
@@ -204,7 +204,7 @@
 			answerright.val(result.question[0].right);
 		})
 			.fail(function () {
-				console.log("error");
+				console.log('error');
 			});
 	};
 
@@ -219,7 +219,7 @@
 			$('#questionModal').modal('hide');
 		})
 			.fail(function () {
-				console.log("error");
+				console.log('error');
 			});
 	};
 
