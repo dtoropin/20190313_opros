@@ -26,7 +26,7 @@ class Admin
 	{
 		$answer = [];
 		for ($i = 1; $i <= 5; $i++) {
-			if (isset($_POST['answer' . $i])) {
+			if (isset($_POST['answer' . $i]) && $_POST['answer' . $i] !== '') {
 				$answer[] = trim(htmlentities($_POST['answer' . $i]));
 			} else break;
 		}
@@ -51,7 +51,7 @@ class Admin
 	{
 		$answer = [];
 		for ($i = 1; $i <= 5; $i++) {
-			if (isset($_POST['answer' . $i])) {
+			if (isset($_POST['answer' . $i]) && $_POST['answer' . $i] !== '') {
 				$answer[] = trim(htmlentities($_POST['answer' . $i]));
 			} else break;
 		}

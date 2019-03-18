@@ -4,15 +4,26 @@ require_once 'j4mie/idiorm.php';
 class Main
 {
 	protected $data = [];
+	protected $countQuestion = 3;
+	protected $selectedQuestion = [];
 
 	function __construct()
 	{
 		ORM::configure('sqlite:../database/opros.sqlite');
+		$arrayID = ORM::for_table('question')->select('id')->find_array();
+		while (count($this->selectedQuestion) < $this->countQuestion) {
+			$numberID = $arrayID[rand(0, (count($arrayID) - 1))]['id'];
+			if (!in_array($numberID, $this->selectedQuestion)) {
+				$this->selectedQuestion[] = $numberID;
+			} else {
+				continue;
+			}
+		}
 	}
 
 	function get()
 	{
-		$this->data['row'] = ORM::for_table('question')->find_array();
+		$this->data['row'] = ORM::for_table('question')->where_id_in($this->selectedQuestion)->find_array();
 		return $this->data;
 	}
 
