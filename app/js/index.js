@@ -125,7 +125,7 @@
 			}
 		});
 		$('.questions__radio').prop('disabled', true);
-		var rightAnswer = count / _rightAnswers.length * 100;
+		var rightAnswer = (count / _rightAnswers.length * 100).toFixed(2);
 		$('.answerForm__right').val(rightAnswer);
 
 		// отправка данных и вывод результата

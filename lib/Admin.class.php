@@ -41,6 +41,32 @@ class Admin
 		return true;
 	}
 
+	function getOne($param)
+	{
+		$this->data['question'] = ORM::for_table('question')->where('id', $param)->find_array();
+		return $this->data;
+	}
+
+	function edit()
+	{
+		$answer = [];
+		for ($i = 1; $i <= 5; $i++) {
+			if (isset($_POST['answer' . $i])) {
+				$answer[] = trim(htmlentities($_POST['answer' . $i]));
+			} else break;
+		}
+		$answer = implode(';', $answer);
+		$id = htmlentities($_POST['id']);
+
+		$questionSave = ORM::for_table('question')->find_one($id);
+		$questionSave->questions = trim(htmlentities($_POST['question']));
+		$questionSave->answers = $answer;
+		$questionSave->right = htmlentities($_POST['answerright']);
+		$questionSave->save();
+
+		return true;
+	}
+
 	function delete($param)
 	{
 		$deleteQuestion = ORM::for_table('question')->find_one($param);

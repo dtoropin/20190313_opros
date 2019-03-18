@@ -24,7 +24,7 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-answers tab-pane active" id="profile">
 			<h2>Прошли опрос:</h2>
-			<table class="table table-striped" id="tableAnswers"></table>
+			<table class="table" id="tableAnswers"></table>
 		</div><!-- .tab-pane -->
 
 		<div role="tabpanel" class="tab-questions tab-pane" id="home">
@@ -42,19 +42,20 @@
 
 <!-- Modal -->
 <div class="modal fade" id="questionModal" tabindex="-1" role="dialog">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title" id="questionModalLabel">Добавление вопроса</h4>
+				<h4 class="modal-title" id="questionModalLabel"></h4>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span></button>
 			</div>
 			<form id="questionForm">
 				<div class="modal-body">
+					<input type="hidden" name="id" class="modal-id">
 					<div class="form-group">
 						<label>Вопрос:
 							<textarea type="text" name="question"
-												class="form-control"
+												class="form-control modal-question"
 												placeholder="Ваш вопрос"
 							></textarea>
 						</label>
@@ -66,14 +67,14 @@
 							<input type="number" name="answerright"
 										 min="1"
 										 max="5"
-										 class="form-control"
+										 class="form-control modal-answerright"
 										 placeholder="Номер правильного ответа"
 							>
 						</label>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary">
+					<button type="submit" class="modal-btn btn btn-primary">
 						Сохранить
 					</button>
 				</div>

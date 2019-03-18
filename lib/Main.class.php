@@ -19,8 +19,8 @@ class Main
 	function save()
 	{
 		$saveFIOResult = ORM::for_table('usersanswer')->create();
-		$saveFIOResult->name = trim(htmlentities(strtolower($_POST['name'])));
-		$saveFIOResult->surname = trim(htmlentities(strtolower($_POST['surname'])));
+		$saveFIOResult->name = trim(htmlentities(mb_strtolower($_POST['name'])));
+		$saveFIOResult->surname = trim(htmlentities(mb_strtolower($_POST['surname'])));
 		$saveFIOResult->right = htmlentities($_POST['right']);
 		$saveFIOResult->save();
 
@@ -29,8 +29,8 @@ class Main
 
 	function check()
 	{
-		$name = trim(htmlentities(strtolower($_POST['name'])));
-		$surname = trim(htmlentities(strtolower($_POST['surname'])));
+		$name = trim(htmlentities(mb_strtolower($_POST['name'])));
+		$surname = trim(htmlentities(mb_strtolower($_POST['surname'])));
 		$count = ORM::for_table('usersanswer')->where(array(
 			'name' => $name,
 			'surname' => $surname
