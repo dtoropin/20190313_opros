@@ -52,31 +52,31 @@
 		var url = _url + 'question/';
 
 		runAjax(url, null).done(function (result) {
-			var th = '<tr>' +
-				'<th>#</th>' +
-				'<th>Вопрос</th>' +
-				'<th>Ответы</th>' +
-				'<th>Правильный ответ (№)</th>' +
-				'<th>Act.</th>' +
-				'</tr>';
+			var th = '<div class="tab-questions__show-row">' +
+				'<div class="tab-questions__show-number">#</div>' +
+				'<div class="tab-questions__show-question">Вопрос</div>' +
+				'<div class="tab-questions__show-answer">Ответы</div>' +
+				'<div class="tab-questions__show-right">Прав. ответ (№)</div>' +
+				'<div class="tab-questions__show-action">Act.</div>' +
+				'</div>';
 			_tableQuestion.append(th);
 
 			$.each(result.row, function (i, question) {
-				var tr = '<tr>' +
-					'<td>' + (i + 1) + '</td>' +
-					'<td>' + question.questions + '</td>' +
-					'<td>';
+				var tr = '<div class="tab-questions__show-row">' +
+					'<div class="tab-questions__show-number">#' + (i + 1) + '</div>' +
+					'<div class="tab-questions__show-question">' + question.questions + '</div>' +
+					'<div class="tab-questions__show-answer">';
 
 				$.each(question.answers.split(';'), function (j, answer) {
 					tr += '<p>' + (j + 1) + '. ' + answer + '</p>';
 				});
-				tr += '</td>' +
-					'<td>' + question.right + '</td>' +
-					'<td>' +
+				tr += '</div>' +
+					'<div class="tab-questions__show-right">' + question.right + '</div>' +
+					'<div class="tab-questions__show-action">' +
 					'<img src="img/edit.png" class="modal__edit" alt="edit" data-id="' + question.id + '" data-toggle="modal" data-target="#questionModal">' +
 					'<img src="img/trash.png" class="modal__delete" alt="recycle" data-id="' + question.id + '">' +
-					'</td>' +
-					'</tr>';
+					'</div>' +
+					'</div>';
 				_tableQuestion.append(tr);
 			});
 		})

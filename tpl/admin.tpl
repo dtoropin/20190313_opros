@@ -32,7 +32,7 @@
 			<div class="add">
 				<img src="/img/plus.png" class="tab-questions__add" alt="add" data-toggle="modal" data-target="#questionModal">
 			</div>
-			<table class="table table-striped" id="tableQuestions"></table>
+			<div class="tab-questions__show" id="tableQuestions"></div>
 		</div><!-- .tab-pane -->
 	</div><!-- .tab-content -->
 </div><!-- .container -->

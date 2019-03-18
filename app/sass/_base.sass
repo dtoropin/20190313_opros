@@ -89,5 +89,38 @@ footer
 .table-FIO
 	width: 80%
 
-td p
-	margin-bottom: 10px
+.tab-questions__show
+	&-row
+		display: flex
+		border-bottom: 1px solid #c6c8ca
+		& > div
+			box-sizing: border-box
+			padding: 3px 5px
+		&:nth-child(odd)
+			background: rgba(0,0,0,.05)
+	&-number
+		width: 5%
+	&-question
+		width: 30%
+	&-answer
+		width: 51%
+		& > p
+			margin-bottom: 10px
+	&-right
+		width: 7%
+		font-weight: bold
+	&-action
+		width: 7%
+		text-align: center
+
+@media all and (max-width: 769px)
+	.tab-questions__show
+		&-row
+			flex-direction: column
+			& > div
+				width: 100%
+			&:first-child
+				display: none
+		&-action > img
+			display: inline-block
+			margin: 0 10px 10px
