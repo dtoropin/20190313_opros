@@ -113,16 +113,16 @@
 		$.each(_rightAnswers, function (i, value) {
 			var checked = $('.questions__radio[name="question' + (i + 1) + '"]:checked');
 			// красим правильный ответ в зеленый
-			$('.questions__radio[name="question' + (i + 1) + '"][value=' + value + ']')
-				.parent()
-				.css({color: 'green', fontWeight: 'bold'});
+			var rightAnsw = $('.questions__radio[name="question' + (i + 1) + '"][value=' + value + ']');
+			rightAnsw.parent().css({color: 'green', fontWeight: 'bold'});
 			if (checked.val() === value) {
 				count++;
 			} else {
 				// сохраняем вопрос и неправильный ответ во _wrongAnswers[]
 				var wrongAnsw = checked.parent().text();
+				var wrongQuesRight = rightAnsw.parent().text();
 				var wrongQues = checked.parent().parent().siblings('.questions__question').text();
-				_wrongAnswers.push(wrongQues + '::' + wrongAnsw);
+				_wrongAnswers.push(wrongQues + '||' + wrongQuesRight + '||' + wrongAnsw);
 				// красим неправильный ответ
 				checked
 					.parent()

@@ -5,14 +5,14 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="icon" href="/img/favicon.png">
-	<title>Опрос</title>
+	<title>Зачет</title>
 	<link rel="stylesheet" href="/css/style.min.css">
 </head>
 <body>
 <div class="container">
 	<h2 class="container__head">Зачет по первой помощи.</h2>
 	<small class="container__description">
-		(в рамках курса "Первой помощи" обучения инструкторов пешеходного туризма)
+		(в рамках курса "Первой помощи" обучения инструкторов пешего туризма)
 	</small>
 	<hr>
 

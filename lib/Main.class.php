@@ -34,7 +34,7 @@ class Main
 		$saveFIOResult->name = trim(htmlentities(mb_strtolower($_POST['name'])));
 		$saveFIOResult->surname = trim(htmlentities(mb_strtolower($_POST['surname'])));
 		$saveFIOResult->right = htmlentities($_POST['right']);
-		$saveFIOResult->wrong = htmlentities($_POST['wrongAnsw']);
+		$saveFIOResult->wrong = htmlspecialchars($_POST['wrongAnsw']);
 		$saveFIOResult->save();
 
 		return true;

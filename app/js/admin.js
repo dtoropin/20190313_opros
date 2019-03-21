@@ -49,9 +49,10 @@
 						: Array(answer.wrong);
 
 					$.each(wrong, function (j, wrongAns) {
-						var wrongBlock = wrongAns.split('::');
+						var wrongBlock = wrongAns.split('||');
 						tr += '<p class="text-black-50">' + (j + 1) + '.&nbsp;' + wrongBlock[0] + ':</p>' +
-							'<p class="accordion__text-danger text-danger">&nbsp;- ' + wrongBlock[1] + '</p>';
+							'<p class="accordion__text-success text-success">&nbsp;- ' + wrongBlock[1] + '</p>' +
+							'<p class="accordion__text-danger text-danger">&nbsp;- ' + wrongBlock[2] + '</p>';
 					});
 				}
 
@@ -124,7 +125,6 @@
 			var url = _url + 'countall/';
 
 			runAjax(url, null).done(function (result) {
-				console.log(result.countall);
 				if (result.countall > _countAllAnswers) {
 					_badge.text(result.countall - _countAllAnswers).show();
 				}
