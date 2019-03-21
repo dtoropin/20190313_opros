@@ -8,6 +8,8 @@
 		_accordion = $('.accordion'),
 		_form = $('#questionForm'),
 		_formTitle = $('.modal-title'),
+		_badge = $('.tab-pane__badge'),
+		_countAllAnswers = null,
 		_countRightAnswer = 87,
 		_url = '/admin/',
 		_numberAnswer = null;
@@ -16,6 +18,7 @@
 		_getAnswer();
 		_getQuestions();
 		_setUpListners();
+		_getNewAnswers();
 	};
 
 	// заполняем таблицу ответов
@@ -23,6 +26,8 @@
 		var url = _url + 'answer/';
 
 		runAjax(url, null).done(function (result) {
+			_countAllAnswers = result.row.length;
+
 			var th = '<div class="accordion__row">' +
 				'<div class="accordion__number">#</div>' +
 				'<div class="accordion__FIO">ФИО</div>' +
@@ -31,7 +36,6 @@
 			_accordion.append(th);
 
 			$.each(result.row, function (i, answer) {
-
 				var tr = '<div class="accordion__row-answer accordion__row-answer--' + ((answer.right >= _countRightAnswer) ? 'success' : 'danger') + '">' +
 					'<div class="accordion__number">' + (i + 1) + '</div>' +
 					'<div class="accordion__FIO">' + answer.surname + ' ' + answer.name + '</div>' +
@@ -111,6 +115,31 @@
 		_tableQuestion.on('click', '.modal__edit', _editModalInput);
 		_addForm.on('click', _addFormInput);
 		_accordion.on('click', '.accordion__row-answer', _accordionShow);
+		_badge.on('click', _updateAnswer);
+	};
+
+	// get count new answers
+	var _getNewAnswers = function () {
+		setInterval(function () {
+			var url = _url + 'countall/';
+
+			runAjax(url, null).done(function (result) {
+				console.log(result.countall);
+				if (result.countall > _countAllAnswers) {
+					_badge.text(result.countall - _countAllAnswers).show();
+				}
+			})
+				.fail(function () {
+					console.log('error');
+				});
+		}, 30000);
+	};
+
+	// update answers
+	var _updateAnswer = function () {
+		_badge.text('').hide();
+		_accordion.empty();
+		_getAnswer();
 	};
 
 	// accordion wrongAnswers

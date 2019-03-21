@@ -58,6 +58,15 @@ footer
 
 .tab-pane
 	position: relative
+	&__badge
+		display: none
+		position: absolute
+		top: 3px
+		right: 10px
+		font-size: 21px
+		line-height: 21px
+		padding-bottom: 10px
+		cursor: pointer
 
 .nav-tabs
 	margin-bottom: 30px
@@ -98,6 +107,8 @@ footer
 			padding: 3px 5px
 		&:nth-child(odd)
 			background: rgba(0, 0, 0, .05)
+		&:first-child
+			font-weight: bold
 	&-number
 		width: 5%
 	&-question
@@ -108,7 +119,6 @@ footer
 			margin-bottom: 10px
 	&-right
 		width: 7%
-		font-weight: bold
 	&-action
 		width: 7%
 		text-align: center
@@ -120,9 +130,9 @@ footer
 	&__row
 		display: flex
 		padding: 20px
-		border-bottom: 1px solid #c6c8ca
 	&__row-answer
 		border-radius: 5px
+		border-bottom: 1px solid #c6c8ca
 		&--danger
 			background: lighten(#dc3545, 20%)
 		&--success

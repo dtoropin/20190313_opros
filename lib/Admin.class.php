@@ -22,6 +22,12 @@ class Admin
 		return $this->data;
 	}
 
+	function countall()
+	{
+		$this->data['countall'] = ORM::for_table('usersanswer')->count();
+		return $this->data;
+	}
+
 	function add()
 	{
 		$answer = [];

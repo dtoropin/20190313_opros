@@ -24,6 +24,7 @@
 	<div class="tab-content">
 		<div role="tabpanel" class="tab-answers tab-pane active" id="answer">
 			<h2>Прошли опрос:</h2>
+			<span class="tab-pane__badge badge badge-pill badge-success">3</span>
 			<div class="accordion"></div>
 		</div><!-- .tab-pane -->
 
