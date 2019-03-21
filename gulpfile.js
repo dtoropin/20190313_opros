@@ -134,56 +134,53 @@ gulp.task('default', gulp.series('build', 'watch'));
 
 //////////////////////////////////////////////////////////////////////
 // final build project
-// public
+// dist/public_html/*
 gulp.task('public:css', function () {
-	return gulp.src('public_html/css/**/*.*').pipe(gulp.dest('public/public_html/css/'))
-});
-gulp.task('public:js', function () {
-	return gulp.src('public_html/js/**/*.*').pipe(gulp.dest('public/public_html/js/'))
+	return gulp.src(path.src.style)
+		.pipe(sass({ outputStyle: 'expand' }).on("error", notify.onError()))
+		.pipe(rename({ suffix: '.min', prefix: '' }))
+		.pipe(prefixer())
+		.pipe(cssmin())
+		.pipe(gulp.dest('dist/public_html/css/'))
 });
 gulp.task('public:fonts', function () {
-	return gulp.src('public_html/fonts/**/*.*').pipe(gulp.dest('public/public_html/fonts/'))
+	return gulp.src('public_html/fonts/**/*.*').pipe(gulp.dest('dist/public_html/fonts/'))
 });
 gulp.task('public:img', function () {
-	return gulp.src('public_html/img/**/*.*').pipe(gulp.dest('public/public_html/img/'))
+	return gulp.src('public_html/img/**/*.*').pipe(gulp.dest('dist/public_html/img/'))
+});
+gulp.task('public:js', function () {
+	return gulp.src('public_html/js/**/*.*').pipe(gulp.dest('dist/public_html/js/'))
 });
 gulp.task('public:index', function () {
-	return gulp.src('index.php').pipe(gulp.dest('public/public_html/'))
-});
-
-gulp.task('public:php', function () {
-	return gulp.src('php/**/*.*').pipe(gulp.dest('public/php/'))
-});
-gulp.task('public:vendor', function () {
-	return gulp.src('vendor/**/*.*').pipe(gulp.dest('public/vendor/'))
-});
-gulp.task('public:views', function () {
-	return gulp.src('views/**/*.*').pipe(gulp.dest('public/views/'))
-});
-gulp.task('public:database', function () {
-	return gulp.src('database/**/*.*').pipe(gulp.dest('public/database/'))
-});
-gulp.task('public:config', function () {
-	return gulp.src('config/**/*.*').pipe(gulp.dest('public/config/'))
+	return gulp.src('public_html/index.php').pipe(gulp.dest('dist/public_html/'))
 });
 gulp.task('public:htaccess', function () {
-	return gulp.src('ht.access').pipe(gulp.dest('public/'))
+	return gulp.src('public_html/.htaccess').pipe(gulp.dest('dist/public_html/'))
 });
-gulp.task('public:readme', function () {
-	return gulp.src('readme.md').pipe(gulp.dest('public/'))
+// dist/*
+gulp.task('public:config', function () {
+	return gulp.src('config/**/*.*').pipe(gulp.dest('dist/config/'))
+});
+gulp.task('public:database', function () {
+	return gulp.src('database/**/*.*').pipe(gulp.dest('dist/database/'))
+});
+gulp.task('public:lib', function () {
+	return gulp.src('lib/**/*.*').pipe(gulp.dest('dist/lib/'))
+});
+gulp.task('public:tpl', function () {
+	return gulp.src('tpl/**/*.*').pipe(gulp.dest('dist/tpl/'))
 });
 
 gulp.task('public', gulp.series(
 	'public:css',
-	'public:js',
 	'public:fonts',
 	'public:img',
-	'public:php',
-	'public:vendor',
-	'public:views',
-	'public:database',
-	'public:config',
+	'public:js',
 	'public:index',
 	'public:htaccess',
-	'public:readme'
+	'public:config',
+	'public:database',
+	'public:lib',
+	'public:tpl'
 ));
