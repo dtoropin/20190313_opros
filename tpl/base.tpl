@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class="container">
-	<h2 class="container__head">Опрос по первой помощи.</h2>
+	<h2 class="container__head">Зачет по первой помощи.</h2>
 	<small class="container__description">
 		(в рамках курса "Первой помощи" обучения инструкторов пешеходного туризма)
 	</small>
@@ -27,6 +27,7 @@
 							 autofocus
 				>
 			</div><!-- .answerForm__item -->
+
 			<div class="answerForm__item form-group col-lg-6 col-md-6">
 				<label for="inputsurname">Фамилия</label>
 				<input type="text" name="surname"
@@ -35,6 +36,7 @@
 							 placeholder="Ваша фамилия"
 				>
 			</div><!-- .answerForm__item -->
+
 			<button class="answerForm__checkFIO btn btn-outline-info btn-lg">
 				Перейти к вопросам ->
 			</button>
@@ -51,6 +53,8 @@
 				Посмотреть результат
 			</button>
 		</div><!-- .answerForm__question -->
+		
+		<input type="hidden" name="wrongAnsw" class="answerForm__wrong-answers">
 	</form>
 </div><!-- .container -->
 <footer class="small text-center">
@@ -64,11 +68,13 @@
 			<div class="modal-header">
 				<h5 class="modal-title">Ваш результат</h5>
 			</div>
+
 			<div class="answer-block modal-body">
 				<strong>Правильных ответов:
 					<span class="answer-block__right display-4">78%</span>
 				</strong>
 			</div>
+
 			<div class="modal-footer">
 				<button type="button"
 								class="answer-block__btn btn btn-outline-secondary"
@@ -76,7 +82,7 @@
 				>
 					Закрыть и посмотреть, где накосячили..
 				</button>
-			</div>
+			</div><!-- .modal-footer -->
 		</div><!-- .modal-content -->
 	</div><!-- .modal-dialog -->
 </div><!-- .modal -->

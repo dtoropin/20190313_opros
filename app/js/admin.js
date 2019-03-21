@@ -4,8 +4,8 @@
 		_buttonClose = $('.close'),
 		_buttonSubmit = $('.modal-btn'),
 		_addForm = $('.tab-questions__add'),
-		_tableAnswer = $('#tableAnswers'),
-		_tableQuestion = $('#tableQuestions'),
+		_tableQuestion = $('.tab-questions__show'),
+		_accordion = $('.accordion'),
 		_form = $('#questionForm'),
 		_formTitle = $('.modal-title'),
 		_countRightAnswer = 87,
@@ -23,25 +23,41 @@
 		var url = _url + 'answer/';
 
 		runAjax(url, null).done(function (result) {
-			var th = '<tr>' +
-				'<th>#</th>' +
-				'<th class="table-FIO">ФИО</th>' +
-				'<th>Правильных ответов</th>' +
-				'</tr>';
-			_tableAnswer.append(th);
+			var th = '<div class="accordion__row">' +
+				'<div class="accordion__number">#</div>' +
+				'<div class="accordion__FIO">ФИО</div>' +
+				'<div class="accordion__right">Пра&shy;виль&shy;ных отве&shy;тов</div>' +
+				'</div>';
+			_accordion.append(th);
 
 			$.each(result.row, function (i, answer) {
-				var tr = '<tr class="table-' + ((answer.right >= _countRightAnswer) ? 'success' : 'danger') + '">' +
-					'<td>' + (i + 1) + '</td>' +
-					'<td class="text-capitalize">' + answer.surname + ' ' + answer.name + '</td>' +
-					'<td>' + answer.right + '%</td>' +
-					'</tr>';
-				_tableAnswer.append(tr);
+
+				var tr = '<div class="accordion__row-answer accordion__row-answer--' + ((answer.right >= _countRightAnswer) ? 'success' : 'danger') + '">' +
+					'<div class="accordion__number">' + (i + 1) + '</div>' +
+					'<div class="accordion__FIO">' + answer.surname + ' ' + answer.name + '</div>' +
+					'<div class="accordion__right">' + answer.right + '%</div>' +
+					'</div>' +
+					'<div class="accordion__collapse">';
+
+				if (answer.wrong !== '') {
+					var wrong = answer.wrong.indexOf(';') > -1
+						? answer.wrong.split(';')
+						: Array(answer.wrong);
+
+					$.each(wrong, function (j, wrongAns) {
+						var wrongBlock = wrongAns.split('::');
+						tr += '<p class="text-black-50">' + (j + 1) + '.&nbsp;' + wrongBlock[0] + ':</p>' +
+							'<p class="accordion__text-danger text-danger">&nbsp;- ' + wrongBlock[1] + '</p>';
+					});
+				}
+
+				tr += '</div>';
+				_accordion.append(tr);
 			});
 		})
 			.fail(function () {
-				var tr = '<tr><td colspan="3">Ответов пока нет..</td></tr>';
-				_tableAnswer.append(tr);
+				var tr = '<div class="accordion__row">Ответов пока нет..</div>';
+				_accordion.append(tr);
 			});
 	};
 
@@ -68,7 +84,7 @@
 					'<div class="tab-questions__show-answer">';
 
 				$.each(question.answers.split(';'), function (j, answer) {
-					tr += '<p>' + (j + 1) + '. ' + answer + '</p>';
+					tr += '<p>' + (j + 1) + '.&nbsp;' + answer + '</p>';
 				});
 				tr += '</div>' +
 					'<div class="tab-questions__show-right">' + question.right + '</div>' +
@@ -81,7 +97,7 @@
 			});
 		})
 			.fail(function () {
-				var tr = '<tr><td colspan="5">Вопросов пока нет..</td></tr>';
+				var tr = '<div class="tab-questions__show-row">Вопросов пока нет..</div>';
 				_tableQuestion.append(tr);
 			});
 	};
@@ -94,6 +110,14 @@
 		_tableQuestion.on('click', '.modal__delete', _deleteQuestion);
 		_tableQuestion.on('click', '.modal__edit', _editModalInput);
 		_addForm.on('click', _addFormInput);
+		_accordion.on('click', '.accordion__row-answer', _accordionShow);
+	};
+
+	// accordion wrongAnswers
+	var _accordionShow = function () {
+		$(this).next('.accordion__collapse')
+			.slideToggle().siblings('.accordion__collapse:visible')
+			.slideUp();
 	};
 
 	// выбор действия с формой

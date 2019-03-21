@@ -12,7 +12,7 @@ class Admin
 
 	function answer()
 	{
-		$this->data['row'] = ORM::for_table('usersanswer')->find_array();
+		$this->data['row'] = ORM::for_table('usersanswer')->order_by_asc('surname')->find_array();
 		return $this->data;
 	}
 

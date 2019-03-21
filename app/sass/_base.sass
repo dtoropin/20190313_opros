@@ -97,7 +97,7 @@ footer
 			box-sizing: border-box
 			padding: 3px 5px
 		&:nth-child(odd)
-			background: rgba(0,0,0,.05)
+			background: rgba(0, 0, 0, .05)
 	&-number
 		width: 5%
 	&-question
@@ -112,6 +112,48 @@ footer
 	&-action
 		width: 7%
 		text-align: center
+
+.accordion
+	&__row
+		font-weight: bold
+	&__row-answer,
+	&__row
+		display: flex
+		padding: 20px
+		border-bottom: 1px solid #c6c8ca
+	&__row-answer
+		border-radius: 5px
+		&--danger
+			background: lighten(#dc3545, 20%)
+		&--success
+			background: lighten(#28a745, 20%)
+	&__number
+		width: 5%
+	&__FIO
+		width: 75%
+		text-align: left
+		text-transform: capitalize
+		color: $text_color
+		&:hover
+			color: $text_color
+	&__right
+		width: 20%
+		word-wrap: break-word
+	&__collapse
+		padding: 5px 20px
+		display: none
+	&__text-danger
+		padding-left: 20px
+
+.auth
+	position: absolute
+	top: 50%
+	left: 50%
+	transform: translate(-50%, -50%)
+	width: 230px
+	text-align: center
+	&__input
+		width: 100%
 
 @media all and (max-width: 769px)
 	.tab-questions__show

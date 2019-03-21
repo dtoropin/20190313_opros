@@ -7,6 +7,7 @@
 		_btnSubmit = $('.answerForm__btn'),
 		_inputFIO = $('.answerForm__item-input'),
 		_rightAnswers = [],
+		_wrongAnswers = [],
 		_countRightAnswer = 87,
 		_url = '/main/';
 
@@ -77,7 +78,7 @@
 
 				var div = '<div class="form-group jumbotron">' +
 					'<b>#' + (i + 1) + '</b>' +
-					'<p>' + question + '</p>';
+					'<p class="questions__question">' + question + '</p>';
 
 				$.each(answer, function (j, radio) {
 					div += '<div class="radio">' +
@@ -118,6 +119,10 @@
 			if (checked.val() === value) {
 				count++;
 			} else {
+				// сохраняем вопрос и неправильный ответ во _wrongAnswers[]
+				var wrongAnsw = checked.parent().text();
+				var wrongQues = checked.parent().parent().siblings('.questions__question').text();
+				_wrongAnswers.push(wrongQues + '::' + wrongAnsw);
 				// красим неправильный ответ
 				checked
 					.parent()
@@ -127,6 +132,8 @@
 		$('.questions__radio').prop('disabled', true);
 		var rightAnswer = (count / _rightAnswers.length * 100).toFixed(2);
 		$('.answerForm__right').val(rightAnswer);
+		var wrong = _wrongAnswers.join(';');
+		$('.answerForm__wrong-answers').val(wrong);
 
 		// отправка данных и вывод результата
 		var url = _url + 'save/',

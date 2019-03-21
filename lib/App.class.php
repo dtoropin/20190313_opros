@@ -12,8 +12,10 @@ class App
 	{
 		$this->url = $_SERVER['REQUEST_URI'];
 
-		if ($this->url == MAIN_PAGE) $this->page = MAIN_TEMPLATE;
-		if ($this->url == ADMIN_PAGE) $this->page = ADMIN_TEMPLATE;
+		if ($this->url === MAIN_PAGE) $this->page = MAIN_TEMPLATE;
+		if ($this->url === ADMIN_PAGE) {
+			$this->page = isset($_COOKIE['auth']) ? ADMIN_TEMPLATE : AUTH_TEMPLATE;
+		}
 
 		// если не главная и не админка
 		if ($this->url != MAIN_PAGE && $this->url != ADMIN_PAGE) {

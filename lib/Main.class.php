@@ -4,26 +4,27 @@ require_once 'j4mie/idiorm.php';
 class Main
 {
 	protected $data = [];
-	protected $countQuestion = 5;
-	protected $selectedQuestion = [];
+	protected $countQuestion = 2;
 
 	function __construct()
 	{
 		ORM::configure('sqlite:../database/opros.sqlite');
-		$arrayID = ORM::for_table('question')->select('id')->find_array();
-		while (count($this->selectedQuestion) < $this->countQuestion) {
-			$numberID = $arrayID[rand(0, (count($arrayID) - 1))]['id'];
-			if (!in_array($numberID, $this->selectedQuestion)) {
-				$this->selectedQuestion[] = $numberID;
-			} else {
-				continue;
-			}
-		}
 	}
 
 	function get()
 	{
-		$this->data['row'] = ORM::for_table('question')->where_id_in($this->selectedQuestion)->find_array();
+		$selectedQuestion = [];
+		$arrayID = ORM::for_table('question')->select('id')->find_array();
+		while (count($selectedQuestion) < $this->countQuestion) {
+			$numberID = $arrayID[rand(0, (count($arrayID) - 1))]['id'];
+			if (!in_array($numberID, $selectedQuestion)) {
+				$selectedQuestion[] = $numberID;
+			} else {
+				continue;
+			}
+		}
+
+		$this->data['row'] = ORM::for_table('question')->where_id_in($selectedQuestion)->find_array();
 		return $this->data;
 	}
 
@@ -33,6 +34,7 @@ class Main
 		$saveFIOResult->name = trim(htmlentities(mb_strtolower($_POST['name'])));
 		$saveFIOResult->surname = trim(htmlentities(mb_strtolower($_POST['surname'])));
 		$saveFIOResult->right = htmlentities($_POST['right']);
+		$saveFIOResult->wrong = htmlentities($_POST['wrongAnsw']);
 		$saveFIOResult->save();
 
 		return true;

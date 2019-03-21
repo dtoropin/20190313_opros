@@ -13,28 +13,29 @@
 	<!-- Nav tabs -->
 	<ul class="nav nav-tabs" role="tablist">
 		<li role="presentation" class="nav-item active">
-			<a href="#profile" class="nav-link active" aria-controls="profile" role="tab" data-toggle="tab">Ответы</a>
+			<a href="#answer" class="nav-link active" aria-controls="answer" role="tab" data-toggle="tab">Ответы:</a>
 		</li>
 		<li role="presentation" class="nav-item">
-			<a href="#home" class="nav-link" aria-controls="home" role="tab" data-toggle="tab">Вопросы</a>
+			<a href="#question" class="nav-link" aria-controls="question" role="tab" data-toggle="tab">Вопросы:</a>
 		</li>
 	</ul>
 
 	<!-- Tab panes -->
 	<div class="tab-content">
-		<div role="tabpanel" class="tab-answers tab-pane active" id="profile">
+		<div role="tabpanel" class="tab-answers tab-pane active" id="answer">
 			<h2>Прошли опрос:</h2>
-			<table class="table" id="tableAnswers"></table>
+			<div class="accordion"></div>
 		</div><!-- .tab-pane -->
 
-		<div role="tabpanel" class="tab-questions tab-pane" id="home">
+		<div role="tabpanel" class="tab-questions tab-pane" id="question">
 			<h2>Список вопросов:</h2>
 			<div class="add">
 				<img src="/img/plus.png" class="tab-questions__add" alt="add" data-toggle="modal" data-target="#questionModal">
 			</div>
-			<div class="tab-questions__show" id="tableQuestions"></div>
+			<div class="tab-questions__show"></div>
 		</div><!-- .tab-pane -->
 	</div><!-- .tab-content -->
+
 </div><!-- .container -->
 <footer class="small text-center">
 	&copy;&nbsp;2019, Д.Торопин, вопросы&nbsp;-&nbsp;Ю.Леонтьева
@@ -48,7 +49,8 @@
 				<h4 class="modal-title" id="questionModalLabel"></h4>
 				<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true">&times;</span></button>
-			</div>
+			</div><!-- .modal-header -->
+
 			<form id="questionForm">
 				<div class="modal-body">
 					<input type="hidden" name="id" class="modal-id">
@@ -61,8 +63,10 @@
 							></textarea>
 						</label>
 					</div>
+
 					<div class="rowanswer"></div>
 					<button class="btn btn-outline-secondary addAnswer">Добавить ответ</button>
+
 					<div class="form-group">
 						<label>Номер правильного ответа
 							<input type="number" name="answerright"
@@ -73,15 +77,16 @@
 							>
 						</label>
 					</div>
-				</div>
+
+				</div><!-- .modal-body -->
 				<div class="modal-footer">
 					<button type="submit" class="modal-btn btn btn-primary">
 						Сохранить
 					</button>
-				</div>
+				</div><!-- .modal-footer -->
 			</form>
-		</div>
-	</div>
+		</div><!-- .modal-content -->
+	</div><!-- .modal-dialog -->
 </div><!-- .modal -->
 
 <script src="/js/vendor.min.js"></script>
