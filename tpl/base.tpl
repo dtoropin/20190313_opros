@@ -53,7 +53,7 @@
 				Посмотреть результат
 			</button>
 		</div><!-- .answerForm__question -->
-		
+
 		<input type="hidden" name="wrongAnsw" class="answerForm__wrong-answers">
 	</form>
 </div><!-- .container -->

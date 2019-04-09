@@ -43,11 +43,12 @@ var path = {
 };
 
 var config = {
-	server: {
-			baseDir: './public_html'
-	},
-	host: 'localhost',
-	port: 9000,
+	// server: {
+	// 		baseDir: './public_html'
+	// },
+	// host: 'localhost',
+	// port: 9000,
+	proxy: 'http://opros.loc',
 	browser: ['chrome']
 };
 
@@ -130,7 +131,7 @@ gulp.task('clean', function (cb) {
 
 // default task
 // gulp.task('default', gulp.series('clean', 'build', gulp.parallel('webserver', 'watch')));
-gulp.task('default', gulp.series('build', 'watch'));
+gulp.task('default', gulp.series('build', gulp.parallel('webserver', 'watch')));
 
 //////////////////////////////////////////////////////////////////////
 // final build project
